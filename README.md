@@ -1,12 +1,30 @@
 # Golang SDK for Tinkoff Bank currency exchange rates
+
 [![Build Status](https://travis-ci.com/sokolovvs/go-tinkoff-exchange-rates-sdk.svg?branch=master)](https://travis-ci.com/sokolovvs/go-tinkoff-exchange-rates-sdk)
+
+### Package installation
+
+```shell
+go get github.com/sokolovvs/go-tinkoff-exchange-rates-sdk
+```
 
 ### Usage example
 
 ```go
+package main
+
+import (
+	"fmt"
+	tinkoff_exchange_rate "github.com/sokolovvs/go-tinkoff-exchange-rates-sdk"
+)
+
+func main() {
+	UpdateTinkoffRates()
+}
+
 func UpdateTinkoffRates() {
-	defaultFilterFunc := func(rate RateFromResponse) bool {
-		if  rate.Category == "C2CTransfers" {
+	defaultFilterFunc := func(rate tinkoff_exchange_rate.RateFromResponse) bool {
+		if rate.Category == "C2CTransfers" {
 			return true
 		}
 
@@ -20,14 +38,16 @@ func UpdateTinkoffRates() {
 	UpdateTinkoffRatesByParams(map[string]string{"from": "AUD", "to": "RUB"}, defaultFilterFunc)
 }
 
-func UpdateTinkoffRatesByParams(params map[string]string, filterFunc func(response RateFromResponse) bool) {
-	response, err := FetchCurrencyRates(params)
+func UpdateTinkoffRatesByParams(params map[string]string, filterFunc func(response tinkoff_exchange_rate.RateFromResponse) bool) {
+	response, err := tinkoff_exchange_rate.FetchCurrencyRates(params)
 
 	if err != nil {
-		log.Error(err)
+		panic(err)
 		return
 	}
 
-	rates := FilterRates(response.Payload.Rates, filterFunc)
+	rates := tinkoff_exchange_rate.FilterRates(response.Payload.Rates, filterFunc)
+
+	fmt.Println(rates)
 }
 ```
