@@ -1,6 +1,7 @@
 # Golang SDK for Tinkoff Bank currency exchange rates
 
 [![Build Status](https://travis-ci.com/sokolovvs/go-tinkoff-exchange-rates-sdk.svg?branch=master)](https://travis-ci.com/sokolovvs/go-tinkoff-exchange-rates-sdk)
+[![Go](https://github.com/sokolovvs/go-tinkoff-exchange-rates-sdk/actions/workflows/go.yml/badge.svg)](https://github.com/sokolovvs/go-tinkoff-exchange-rates-sdk/actions/workflows/go.yml)
 
 ### Package installation
 
